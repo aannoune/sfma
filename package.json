@@ -1,0 +1,27 @@
+{
+  "name": "sfma",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nayed/sfma.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nayed/sfma/issues"
+  },
+  "homepage": "https://github.com/nayed/sfma#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "swagger-ui-express": "^2.0.15",
+    "yamljs": "^0.3.0"
+  }
+}

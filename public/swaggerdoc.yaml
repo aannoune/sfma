@@ -1,0 +1,158 @@
+swagger: '2.0'
+info:
+  title: 'RECRUITMENT EXERCISE'
+  version: 0.1.0
+  description: File manager REST Api
+
+schemes:
+  - http
+  - https
+basePath: /
+tags:
+  - name: files 
+    description: Methods related to files management
+paths:
+  /files:
+    get:
+      tags:
+        - files
+      summary: Return a list of available files
+      description: ''
+      operationId: resumeFiles
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/files'
+        '500':
+          description: Operation failed
+  /files/{file_id}:
+    get:
+      tags:
+        - files
+      summary: Download a specific file by ID
+      description: ''
+      operationId: downloadFile
+      produces:
+        - application/octet-stream
+      parameters:
+        - name: file_id
+          required : true
+          in: path
+          description : id of the file
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: file
+        '400':
+          description: Invalid ID supplied
+        '500':
+          description: File not found
+    delete:
+      tags:
+        - files
+      summary: Delete a file
+      description: ''
+      operationId: deleteFile
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: file_id
+          required: true
+          in: path
+          description: File ID
+          type: integer
+      responses:
+        '200':
+          description: Status successfuly returned
+        '400': 
+          description: Invalid ID supplied
+        
+  /files/post:
+    post:
+      tags:
+        - files
+      summary: Upload a file
+      description: "Upload a file and return the file informations"
+      operationId: uploadFile
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: fileupload
+          in: body
+          required: true
+          type: file
+      responses:
+        '200':
+          description: status successfuly returned
+          schema:
+           $ref: '#/definitions/fileinfo'
+        '500':
+          description: The upload failed
+  /files/{file_id}/infos:
+    get:
+      tags:
+        - files
+      summary: Get informations about a file
+      description: "Get informations about a specific file"
+      operationId: getInfoFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: file_id
+          required : true
+          in: path
+          description : file id
+          type: integer
+          example: 0
+      responses:
+        '200':
+          description: status successfuly returned
+          schema:
+            $ref: "#/definitions/fileinfo"
+        '500':
+          description: This file doesn't exist
+          
+definitions:
+  files:
+    type: object
+    required:
+      - files
+    properties:
+      files:
+        type: array
+        items:
+          type: fileinfo
+          $ref: '#/definitions/fileinfo'
+  fileinfo:
+    type: object
+    required:
+      - id
+      - name
+      - extension
+      - uploaddate
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+        default: myfile.pdf
+      extension:
+        type: string
+        default: pdf
+      uploaddate:
+        type: string
+        default: '15/10/2017 15:20:00' 
+                         
+responses: {}
+parameters: {}
+securityDefinitions: {}
