@@ -38,6 +38,8 @@ paths:
       operationId: downloadFile
       produces:
         - application/octet-stream
+        - text/html
+        - application/json
       parameters:
         - name: file_id
           required : true
@@ -84,6 +86,8 @@ paths:
       produces:
         - application/json
         - application/xml
+      consumes:
+        - multipart/form-data
       parameters:
         - name: fileupload
           in: body

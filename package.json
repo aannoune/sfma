@@ -21,6 +21,8 @@
   "homepage": "https://github.com/nayed/sfma#readme",
   "dependencies": {
     "express": "^4.16.2",
+    "express-fileupload": "^0.4.0",
+    "moment": "^2.20.1",
     "swagger-ui-express": "^2.0.15",
     "yamljs": "^0.3.0"
   }

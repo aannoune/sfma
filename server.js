@@ -1,16 +1,33 @@
 const express = require('express')
-const path = require('path')
 const app = express()
 
-const publicDir = `${__dirname}/public`
 const swaggerUi = require('swagger-ui-express')
 const yaml = require('yamljs')
+// const fileUpload = require('express-fileupload')
+
+const file = require('./api/controllers/file.js')
+
+const publicDir = `${__dirname}/public`
 const swaggerdoc = yaml.load(`${publicDir}/swaggerdoc.yaml`)
 
 app.set('port', 3000)
 
-app.use(express.static(path.join(publicDir)))
+app.use(express.static(publicDir))
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerdoc, {}))
+// app.use(fileUpload())
+
+// Routing
+// GET /files
+app.get('/files', file.resumeFiles)
+
+// GET /files/{file_id}/infos
+app.get('/files/:file_id/infos', file.getInfoFile)
+
+// /files/{file_id}
+app.get('/files/:file_id', file.downloadFile)
+
+// POST /files/post
+//app.post('/files/post', file.uploadFile)
 
 // Listen for requests
 const server = app.listen(app.get('port'), function() {
