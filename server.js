@@ -10,7 +10,9 @@ const file = require('./api/controllers/file.js')
 const publicDir = `${__dirname}/public`
 const swaggerdoc = yaml.load(`${publicDir}/swaggerdoc.yaml`)
 
-app.set('port', 3000)
+const port = process.env.PORT || 3000
+
+app.set('port', port)
 
 app.use(express.static(publicDir))
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerdoc, {}))
