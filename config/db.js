@@ -4,6 +4,10 @@ const moment = require('moment')
 
 const uploadDir = `${process.cwd()}/uploads`
 
+/* 
+ * Returns file info in the uploads folder as an array of objects with keys:
+ * id, name, extension, uploaddate
+ */
 function getFilesData() {
   let fileList = []
 
@@ -28,8 +32,8 @@ module.exports = function() {
   return {
     fileList: getFilesData(),
     /*
-		 * Retrieve a file with a given id or return all the file if the id is undefined.
-		 */
+     * Retrieve a file with a given id or return all the file if the id is undefined.
+     */
     find(id) {
       if (id) {
         return this.fileList.find(element => element.id === parseInt(id))
@@ -46,8 +50,8 @@ module.exports = function() {
         : false
     }
     /*
-		 * Delete a file with the given id.
-		 */
+     * Delete a file with the given id.
+     */
     /*remove(id) {
       let found = 0
       this.fileList = this.fileList.filter(element => {
